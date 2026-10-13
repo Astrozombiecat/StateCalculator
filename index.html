@@ -1,121 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1020">
-<title>State Services License & Fee Ledger</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020">
+<title>State Services POS — FiveM</title>
 <style>
-:root{--bg:#0b1020;--panel:#111a2c;--line:#263650;--text:#eef4ff;--muted:#91a2bd;--mint:#6ee7c2;--blue:#7da7ff;--red:#ff8294}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top left,#152643 0%,var(--bg) 48%);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-input,select,button{font:inherit}button{cursor:pointer}.app{max-width:1400px;margin:auto;padding:26px clamp(14px,3vw,38px) 42px}.header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:13px}.logo{height:48px;width:48px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#6ee7c2,#7da7ff);color:#0b1727;font-size:22px;font-weight:900}.eyebrow{font-size:10px;letter-spacing:1.8px;color:var(--mint);font-weight:800}.header h1{font-size:clamp(23px,3vw,34px);letter-spacing:-.8px;margin:2px 0}.sub{font-size:12px;color:var(--muted);margin:2px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 13px;border-radius:9px;border:1px solid #334967;background:#1b2b45;color:var(--text);font-weight:700}.btn.primary{background:var(--mint);color:#092018;border-color:var(--mint)}.btn:hover{filter:brightness(1.1)}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card,.panel{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#141f33,#101827);padding:18px;min-width:0}.metric-label{color:var(--muted);font-size:12px}.metric-value{font-size:clamp(21px,2.5vw,29px);font-weight:850;letter-spacing:-.7px;overflow-wrap:anywhere;margin:10px 0 2px}.mint{color:var(--mint)}.blue{color:var(--blue)}.section{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:26px 0 13px}.section h2{font-size:18px;margin:0}.section p{font-size:12px;color:var(--muted);margin:3px 0 0}.layout{display:grid;grid-template-columns:minmax(300px,.78fr) minmax(0,1.5fr);gap:14px}.panel h3{font-size:16px;margin:0 0 14px}.form{display:grid;gap:12px}.field{display:grid;gap:5px}.field label{font-size:12px;color:#a8b7cc;font-weight:700}.field input,.field select{width:100%;background:#0c1424;color:var(--text);border:1px solid #2b3a54;border-radius:8px;padding:10px 11px;outline:none}.field input:focus,.field select:focus{border-color:var(--mint)}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form .btn{margin-top:3px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:11px;margin-top:12px}table{border-collapse:collapse;width:100%;min-width:720px}th,td{padding:12px 13px;border-bottom:1px solid #233047;text-align:left;font-size:12px;white-space:nowrap}th{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#8ea1bc;background:#111b2d}tr:last-child td{border-bottom:0}.empty{text-align:center;color:var(--muted);padding:27px}.pill{display:inline-block;border-radius:999px;background:#1c2d4b;color:var(--blue);font-size:10px;padding:4px 8px;font-weight:800}.delete{background:transparent;color:var(--red);border:1px solid #49303b;border-radius:6px;padding:5px 8px;font-size:11px}.filters{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:9px;margin-top:14px}.dept-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:12px}.dept-card{background:#0c1726;border:1px solid #2a4057;border-radius:10px;padding:14px}.dept-card .name{font-size:11px;color:var(--muted)}.dept-card .total{font-size:19px;font-weight:800;margin-top:6px}.dept-card .count{font-size:11px;color:#8ea1bc}.notice{border-left:3px solid var(--blue);background:#111f33;padding:10px 12px;color:#b9c8de;border-radius:0 8px 8px 0;font-size:12px;margin-top:15px}.tabbar{display:flex;gap:7px;margin-bottom:16px;padding:4px;background:#0b1423;border:1px solid var(--line);border-radius:10px}.tabbtn{flex:1;border:1px solid transparent;border-radius:7px;padding:9px 10px;background:transparent;color:var(--muted);font-weight:750;font-size:12px}.tabbtn.active{background:#20334b;border-color:#34506c;color:var(--text)}.tabpane[hidden]{display:none}.discount-result{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.discount-tile{padding:14px;border:1px solid #2a4057;background:#0c1726;border-radius:10px}.discount-tile .label{font-size:11px;color:var(--muted)}.discount-tile .value{font-size:22px;font-weight:850;margin-top:5px;overflow-wrap:anywhere}.foot{color:#71839e;font-size:11px;margin-top:22px}.toast{display:none;position:fixed;bottom:18px;right:18px;background:#17362f;border:1px solid #2d6656;color:#baf7e3;padding:12px 16px;border-radius:10px;z-index:5}.toast.show{display:block}
-@media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}}@media(max-width:580px){.app{padding:18px 12px 30px}.header{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.card,.panel{padding:14px}.filters,.two{grid-template-columns:1fr}.section{align-items:flex-start;flex-direction:column}}
-</style></head>
+:root{--bg:#0b1020;--panel:#111a2c;--line:#263650;--text:#eef4ff;--muted:#91a2bd;--mint:#6ee7c2;--blue:#7da7ff;--red:#ff8294;--gold:#ffd27a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top left,#152643 0%,var(--bg) 48%);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}input,select,button{font:inherit}button{cursor:pointer}.app{max-width:1500px;margin:auto;padding:25px clamp(12px,3vw,36px) 42px}.header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:23px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--mint),var(--blue));color:#0b1727;font-weight:950;font-size:20px}.eyebrow{font-size:10px;letter-spacing:1.7px;color:var(--mint);font-weight:850}.header h1{margin:2px 0;font-size:clamp(22px,3vw,33px);letter-spacing:-.7px}.muted{color:var(--muted)}.sub{font-size:12px;color:var(--muted);margin:2px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #334967;background:#1b2b45;color:var(--text);padding:10px 13px;border-radius:9px;font-weight:750}.btn.primary{background:var(--mint);border-color:var(--mint);color:#092018}.btn.danger{border-color:#59303e;color:var(--red);background:#241520}.btn:disabled{opacity:.4;cursor:not-allowed}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat,.panel{background:linear-gradient(145deg,#141f33,#101827);border:1px solid var(--line);border-radius:14px;padding:17px;min-width:0}.stat-label{font-size:12px;color:var(--muted)}.stat-value{font-size:clamp(20px,2.4vw,28px);font-weight:900;margin:7px 0 2px;overflow-wrap:anywhere}.mint{color:var(--mint)}.blue{color:var(--blue)}.section{margin:25px 0 12px}.section h2{font-size:18px;margin:0}.section p{font-size:12px;color:var(--muted);margin:3px 0}.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:14px;align-items:start}.panel h3{margin:0 0 12px;font-size:16px}.catalog-tools{display:grid;grid-template-columns:1fr 190px;gap:9px;margin-bottom:12px}.control,.field input,.field select{width:100%;background:#0c1424;color:var(--text);border:1px solid #2b3a54;border-radius:8px;padding:10px 11px;outline:none}.control:focus,.field input:focus,.field select:focus{border-color:var(--mint)}.catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.item{background:#0c1726;border:1px solid #293b56;border-radius:11px;padding:14px;display:flex;flex-direction:column;gap:9px}.item-top{display:flex;justify-content:space-between;gap:8px}.item-name{font-weight:800}.tag{font-size:10px;color:var(--blue);background:#1c2d4b;border-radius:99px;padding:3px 7px;white-space:nowrap;height:max-content}.item-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto}.price{font-size:19px;font-weight:900;color:var(--mint)}.add{padding:7px 10px;font-size:12px}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed #30415a;border-radius:10px;grid-column:1/-1}.cart-panel{position:sticky;top:12px}.field{display:grid;gap:5px;min-width:0}.field label{font-size:11px;color:#a8b7cc;font-weight:750}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.cart-lines{display:grid;gap:8px;margin:13px 0}.cart-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px;background:#0c1726;border:1px solid #263650;border-radius:9px}.line-title{font-weight:750;font-size:13px}.line-meta{font-size:11px;color:var(--muted);margin-top:2px}.line-controls{display:flex;align-items:center;gap:5px;margin-top:8px;flex-wrap:wrap}.qtybtn{width:25px;height:25px;border-radius:6px;border:1px solid #334967;background:#1b2b45;color:white}.qty{min-width:22px;text-align:center;font-weight:800}.discount-input{width:70px;background:#0b1423;color:white;border:1px solid #334967;border-radius:6px;padding:4px 6px}.remove{border:0;background:transparent;color:var(--red);font-size:11px;padding:4px 5px}.line-total{text-align:right;font-weight:800;white-space:nowrap}.summary{border-top:1px solid #2a3a52;padding-top:12px;display:grid;gap:6px}.sumrow{display:flex;justify-content:space-between;gap:10px;font-size:13px}.sumrow.total{font-size:19px;font-weight:900;padding-top:7px}.checkout-fields{display:grid;gap:10px;margin-top:14px}.checkout-btn{width:100%;margin-top:13px;padding:13px}.notice{font-size:11px;color:#b9c8de;background:#111f33;border-left:3px solid var(--blue);padding:9px 11px;border-radius:0 8px 8px 0;margin-top:12px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:11px;margin-top:12px}table{border-collapse:collapse;width:100%;min-width:760px}th,td{padding:11px 12px;border-bottom:1px solid #233047;text-align:left;font-size:12px;white-space:nowrap}th{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:#8ea1bc;background:#111b2d}tr:last-child td{border-bottom:0}.delete{border:1px solid #49303b;color:var(--red);background:transparent;border-radius:6px;padding:5px 8px;font-size:11px}.history-tools{display:flex;gap:8px;flex-wrap:wrap}.history-tools select,.history-tools input{background:#0c1424;color:white;border:1px solid #2b3a54;border-radius:8px;padding:8px}.toast{display:none;position:fixed;right:18px;bottom:18px;z-index:10;background:#17362f;border:1px solid #2d6656;color:#baf7e3;padding:12px 16px;border-radius:10px;box-shadow:0 10px 30px #0005}.toast.show{display:block}.footer{font-size:11px;color:#71839e;margin-top:22px}
+@media(max-width:950px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.cart-panel{position:static}}
+@media(max-width:560px){.app{padding:16px 10px 30px}.header{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.catalog-tools{grid-template-columns:1fr}.catalog{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.stat,.panel{padding:13px}}
+</style>
+</head>
 <body><div class="app">
-<header class="header"><div class="brand"><div class="logo">SS</div><div><div class="eyebrow">FIVEM ROLEPLAY • GOVERNMENT REVENUE</div><h1>State Services License & Fee Ledger</h1><p class="sub">Track licenses, permits, and government service fees.</p></div></div><div class="actions"><button class="btn" id="export">↓ Export CSV</button><button class="btn" id="clearFilters">Reset filters</button></div></header>
-<div class="cards">
-<div class="card"><div class="metric-label">Total fees collected</div><div class="metric-value mint" id="totalFees">$0.00</div><div class="sub">Based on selected filters</div></div>
-<div class="card"><div class="metric-label">Licenses / fees issued</div><div class="metric-value" id="entryCount">0</div><div class="sub">Recorded transactions</div></div>
-<div class="card"><div class="metric-label">Average fee</div><div class="metric-value" id="averageFee">$0.00</div><div class="sub">Per recorded transaction</div></div>
-<div class="card"><div class="metric-label">Top service</div><div class="metric-value blue" id="topService">—</div><div class="sub" id="topServiceTotal">No records yet</div></div>
+<header class="header"><div class="brand"><div class="logo">SS</div><div><div class="eyebrow">FIVEM ROLEPLAY • GOVERNMENT REVENUE</div><h1>State Services Checkout</h1><p class="sub">Add licenses and permits to a cart, apply discounts, then check out to record the whole sale.</p></div></div><div class="actions"><button class="btn" id="exportBtn">↓ Export CSV</button><button class="btn danger" id="clearCartBtn">Clear cart</button></div></header>
+<div class="stats">
+<div class="stat"><div class="stat-label">Total fees collected</div><div class="stat-value mint" id="statRevenue">$0.00</div><div class="sub">All recorded checkouts</div></div>
+<div class="stat"><div class="stat-label">Completed checkouts</div><div class="stat-value" id="statCheckouts">0</div><div class="sub">Receipts recorded</div></div>
+<div class="stat"><div class="stat-label">Licenses / items issued</div><div class="stat-value" id="statItems">0</div><div class="sub">Quantity after checkout</div></div>
+<div class="stat"><div class="stat-label">Discounts given</div><div class="stat-value blue" id="statDiscount">$0.00</div><div class="sub">Total saved by customers</div></div>
 </div>
-<div class="section"><div><h2>Revenue by service</h2><p>Totals are recalculated when you add records or change the filters.</p></div></div>
-<div class="dept-summary" id="serviceSummary"></div>
-<div class="section"><div><h2>Record a license or fee</h2><p>Enter each issued license, permit, or government service payment.</p></div></div>
+<div class="section"><h2>1. Choose licenses and services</h2><p>Click Add to cart on each license or permit. Change quantities and discounts in the cart.</p></div>
 <div class="layout">
-<section class="panel">
-<div class="tabbar" role="tablist" aria-label="Fee tools">
-<button type="button" class="tabbtn active" id="tabRecord" role="tab" aria-selected="true">Record a fee</button>
-<button type="button" class="tabbtn" id="tabDiscount" role="tab" aria-selected="false">Discount calculator</button>
+<section class="panel"><h3>Service catalogue</h3>
+<div class="catalog-tools"><input class="control" id="searchItems" placeholder="Search licenses and services…" aria-label="Search services"><select class="control" id="categoryFilter" aria-label="Filter services"><option value="">All services</option></select></div>
+<div class="catalog" id="catalog"></div>
+<div class="notice">Default fees are examples. Use “Manage services” to edit prices and add the exact services your server offers.</div>
+<div style="margin-top:15px"><details><summary style="cursor:pointer;font-weight:750">Manage services / fees</summary>
+<div class="formgrid" style="margin-top:12px">
+<div class="field"><label for="newName">Service name</label><input id="newName" placeholder="e.g. Commercial Boating License"></div>
+<div class="field"><label for="newCategory">Category</label><input id="newCategory" placeholder="e.g. Licenses"></div>
+<div class="field"><label for="newPrice">Standard fee ($)</label><input id="newPrice" type="number" min="0" step=".01" placeholder="0.00"></div>
+<div class="field"><label for="editService">Edit existing service</label><select id="editService"><option value="">Choose service to edit</option></select></div>
 </div>
-<div class="tabpane" id="recordPane"><h3>New transaction</h3><form class="form" id="feeForm">
-<div class="field"><label for="serviceType">License / service type</label><select id="serviceType" required>
-<option>Business License</option><option>Boating License</option><option>Fishing License</option><option>Hunting License</option><option>Driver's License</option><option>Weapon License</option><option>Vehicle Registration</option><option>Business Permit</option><option>Other Government Fee</option><option>Custom Service</option>
-</select></div>
-<div class="field" id="customWrap" hidden><label for="customService">Custom service name</label><input id="customService" placeholder="Enter service name"></div>
-<div class="two"><div class="field"><label for="feeAmount">Fee collected ($)</label><input id="feeAmount" type="number" min="0.01" step="0.01" required placeholder="e.g. 500"></div><div class="field"><label for="feeDate">Date issued</label><input id="feeDate" type="date" required></div></div>
-<div class="two"><div class="field"><label for="recipient">Recipient / business name (optional)</label><input id="recipient" placeholder="Character or business name"></div><div class="field"><label for="employee">Issued by (optional)</label><input id="employee" placeholder="Employee / character name"></div></div>
-<div class="field"><label for="receipt">Receipt / notes (optional)</label><input id="receipt" placeholder="Receipt number or note"></div>
-<div class="notice">Each record counts as one issued service and adds the fee entered to revenue. If you issue several licenses, record each one separately.</div>
-<button class="btn primary" type="submit">＋ Record fee</button></form></div>
-<div class="tabpane" id="discountPane" hidden>
-<h3>Discount calculator</h3>
-<p class="sub">Calculate a percentage discount on a license or permit fee before recording the payment.</p>
-<div class="form" style="margin-top:14px">
-<div class="field"><label for="discountService">License / service type</label><select id="discountService">
-<option>Business License</option><option>Boating License</option><option>Fishing License</option><option>Hunting License</option><option>Driver's License</option><option>Weapon License</option><option>Vehicle Registration</option><option>Business Permit</option><option>Other Government Fee</option><option>Custom Service</option>
-</select></div>
-<div class="field" id="discountCustomWrap" hidden><label for="discountCustomName">Custom service name</label><input id="discountCustomName" placeholder="Enter service name"></div>
-<div class="two"><div class="field"><label for="originalFee">Original fee ($)</label><input id="originalFee" type="number" min="0" step="0.01" value="500" placeholder="e.g. 500"></div>
-<div class="field"><label for="discountPercent">Discount (%)</label><input id="discountPercent" type="number" min="0" max="100" step="0.1" value="10" placeholder="e.g. 10"></div></div>
-<div class="discount-result"><div class="discount-tile"><div class="label">Discount amount</div><div class="value blue" id="discountSaved">$50.00</div></div><div class="discount-tile"><div class="label">Final fee to collect</div><div class="value mint" id="discountFinal">$450.00</div></div></div>
-<div class="notice">This tool only calculates the discount. It won't change your totals until you record the discounted fee as a transaction.</div>
-<button type="button" class="btn primary" id="useDiscount">Use discounted fee → Record transaction</button>
-</div>
-</div>
+<div class="actions"><button class="btn primary" id="saveServiceBtn">Add service</button><button class="btn" id="loadServiceBtn">Load selected to edit</button><button class="btn danger" id="deleteServiceBtn">Delete selected</button></div>
+</details></div>
 </section>
-<section class="panel"><h3>License & fee records</h3><p class="sub">Filter by service and date range, then export the matching records.</p>
-<div class="filters"><div class="field"><label for="filterService">Service</label><select id="filterService"><option value="">All services</option></select></div><div class="field"><label for="filterFrom">From date</label><input id="filterFrom" type="date"></div><div class="field"><label for="filterTo">To date</label><input id="filterTo" type="date"></div></div>
-<div class="table-wrap"><table><thead><tr><th>Date</th><th>Service</th><th>Recipient / business</th><th>Issued by</th><th>Fee</th><th>Receipt / notes</th><th></th></tr></thead><tbody id="ledger"></tbody></table></div><p class="sub" style="margin-top:12px">Deleting a record removes it from saved data and recalculates the totals.</p>
-</section></div>
-<p class="foot">Unofficial community tool for FiveM roleplay. Records are stored in this browser only; this website does not connect to your server or verify payments automatically.</p>
+<aside class="panel cart-panel"><h3>2. Shopping cart <span class="tag" id="cartBadge">0 items</span></h3>
+<div class="formgrid">
+<div class="field"><label for="customer">Recipient / business (optional)</label><input id="customer" placeholder="Character or business name"></div>
+<div class="field"><label for="staff">Issued by (optional)</label><input id="staff" placeholder="Employee / character name"></div>
+<div class="field"><label for="checkoutDate">Checkout date</label><input id="checkoutDate" type="date"></div>
+<div class="field"><label for="receiptNote">Receipt / notes (optional)</label><input id="receiptNote" placeholder="Approval, receipt ID, etc."></div>
+</div>
+<div class="cart-lines" id="cartLines"><div class="empty">Your cart is empty. Add a license or permit to begin.</div></div>
+<div class="summary"><div class="sumrow"><span class="muted">Subtotal</span><strong id="subtotal">$0.00</strong></div><div class="sumrow"><span class="muted">Discounts</span><strong class="blue" id="discountTotal">−$0.00</strong></div><div class="sumrow total"><span>Total to collect</span><span class="mint" id="cartTotal">$0.00</span></div></div>
+<button class="btn primary checkout-btn" id="checkoutBtn" disabled>✓ Check out & record sale</button>
+<p class="sub">Checkout saves every cart item to the transaction history and updates all totals.</p>
+</aside>
+</div>
+<div class="section"><h2>3. Checkout history</h2><p>Each completed checkout is saved with its itemized receipt. Filter and export the records below.</p></div>
+<section class="panel"><div class="history-tools"><select id="historyFilter"><option value="">All services</option></select><input id="historyFrom" type="date" aria-label="History from date"><input id="historyTo" type="date" aria-label="History to date"><button class="btn" id="resetHistory">Reset filters</button></div><div class="tablewrap"><table><thead><tr><th>Receipt</th><th>Date</th><th>Service</th><th>Recipient / business</th><th>Issued by</th><th>Qty</th><th>Subtotal</th><th>Discount</th><th>Collected</th><th></th></tr></thead><tbody id="historyRows"></tbody></table></div></section>
+<p class="footer">Unofficial FiveM community tool. Data is saved in this browser on this device. It does not connect to your server or verify payments automatically. Export CSV backups regularly.</p>
 </div><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
-"use strict";const KEY="fivem-state-service-fee-ledger-v1",BASE=["Business License","Boating License","Fishing License","Hunting License","Driver's License","Weapon License","Vehicle Registration","Business Permit","Other Government Fee","Custom Service"];
-const $=id=>document.getElementById(id);let records=[];try{const x=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.isArray(x))records=x;}catch(e){}
-const d=new Date(),today=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);$("feeDate").value=today;
-function save(){localStorage.setItem(KEY,JSON.stringify(records));}function money(n){return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);}
+"use strict";
+const DATA_KEY="fivem-state-service-pos-v1",CART_KEY="fivem-state-service-pos-cart-v1",SERV_KEY="fivem-state-service-pos-services-v1";
+const $=id=>document.getElementById(id);
+const initial=[
+{name:"Business License",category:"Licenses",price:500},
+{name:"Boating License",category:"Licenses",price:250},
+{name:"Fishing License",category:"Licenses",price:150},
+{name:"Hunting License",category:"Licenses",price:200},
+{name:"Driver's License",category:"Licenses",price:300},
+{name:"Weapon License",category:"Licenses",price:750},
+{name:"Vehicle Registration",category:"Registration",price:350},
+{name:"Business Permit",category:"Permits",price:400},
+{name:"Commercial Permit",category:"Permits",price:600},
+{name:"Other Government Fee",category:"Other",price:100}
+];
+function read(key,fallback){try{const x=JSON.parse(localStorage.getItem(key)||"null");return x===null?fallback:x;}catch(e){return fallback;}}
+let services=read(SERV_KEY,initial),receipts=read(DATA_KEY,[]),cart=read(CART_KEY,[]);
+if(!Array.isArray(services))services=initial;if(!Array.isArray(receipts))receipts=[];if(!Array.isArray(cart))cart=[];
+const d=new Date(),today=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);$("checkoutDate").value=today;
+function save(){localStorage.setItem(SERV_KEY,JSON.stringify(services));localStorage.setItem(DATA_KEY,JSON.stringify(receipts));localStorage.setItem(CART_KEY,JSON.stringify(cart));}
+function money(n){return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(Number(n)||0);}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2200);}
-function filtered(){const s=$("filterService").value,from=$("filterFrom").value,to=$("filterTo").value;return records.filter(r=>(!s||r.service===s)&&(!from||r.date>=from)&&(!to||r.date<=to)).sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created);}
-function render(){
- const rows=filtered(),sum=rows.reduce((a,r)=>a+r.amount,0);$("totalFees").textContent=money(sum);$("entryCount").textContent=rows.length;$("averageFee").textContent=money(rows.length?sum/rows.length:0);
- const stats={};rows.forEach(r=>{if(!stats[r.service])stats[r.service]={total:0,count:0};stats[r.service].total+=r.amount;stats[r.service].count++;});
- const ranked=Object.entries(stats).sort((a,b)=>b[1].total-a[1].total);$("topService").textContent=ranked.length?ranked[0][0]:"—";$("topServiceTotal").textContent=ranked.length?money(ranked[0][1].total)+" collected":"No records yet";
- $("serviceSummary").innerHTML=ranked.length?ranked.map(([name,x])=>`<div class="dept-card"><div class="name">${esc(name)}</div><div class="total mint">${money(x.total)}</div><div class="count">${x.count} transaction${x.count===1?"":"s"}</div></div>`:'<div class="dept-card"><div class="name">No records match these filters.</div><div class="count">Add a license or fee to begin.</div></div>';
- const filter=$("filterService"),old=filter.value,all=[...new Set([...BASE,...records.map(r=>r.service)])].sort();filter.innerHTML='<option value="">All services</option>'+all.map(x=>`<option>${esc(x)}</option>`).join("");if(all.includes(old))filter.value=old;
- $("ledger").innerHTML=rows.length?rows.map(r=>`<tr><td>${esc(r.date)}</td><td><span class="pill">${esc(r.service)}</span></td><td>${esc(r.recipient||"—")}</td><td>${esc(r.employee||"—")}</td><td class="mint"><strong>${money(r.amount)}</strong></td><td>${esc(r.receipt||"—")}</td><td><button class="delete" data-delete="${r.id}">Delete</button></td></tr>`).join(""):'<tr><td colspan="7" class="empty">No records yet. Add your first license or fee using the form.</td></tr>';
+function id(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random());}
+function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2500);}
+function serviceById(sid){return services.find(s=>s.id===sid);}
+function ensureIds(){services=services.map(s=>({...s,id:s.id||id(),price:Number(s.price)||0,category:s.category||"Other"}));cart=cart.filter(c=>serviceById(c.serviceId)).map(c=>({...c,qty:Math.max(1,Number(c.qty)||1),discount:Math.min(100,Math.max(0,Number(c.discount)||0))}));}
+ensureIds();
+function renderCatalog(){
+ const q=$("searchItems").value.trim().toLowerCase(),cat=$("categoryFilter").value;
+ const list=services.filter(s=>(!q||(s.name+" "+s.category).toLowerCase().includes(q))&&(!cat||s.category===cat));
+ $("catalog").innerHTML=list.length?list.map(s=>`<article class="item"><div class="item-top"><div><div class="item-name">${esc(s.name)}</div><div class="sub">${esc(s.category)}</div></div><span class="tag">STATE SERVICE</span></div><div class="item-bottom"><div class="price">${money(s.price)}</div><button class="btn primary add" data-add="${s.id}">＋ Add to cart</button></div></article>`).join(""):'<div class="empty">No services match your search.</div>';
+ const cats=[...new Set(services.map(s=>s.category))].sort(),old=$("categoryFilter").value;
+ $("categoryFilter").innerHTML='<option value="">All services</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join("");if(cats.includes(old))$("categoryFilter").value=old;
+ const oldEdit=$("editService").value;
+ $("editService").innerHTML='<option value="">Choose service to edit</option>'+services.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("");if(serviceById(oldEdit))$("editService").value=oldEdit;
+ const oldHist=$("historyFilter").value;
+ $("historyFilter").innerHTML='<option value="">All services</option>'+[...new Set([...services.map(s=>s.name),...receipts.flatMap(r=>r.items.map(i=>i.name))])].sort().map(c=>`<option>${esc(c)}</option>`).join("");if([...$("historyFilter").options].some(o=>o.value===oldHist))$("historyFilter").value=oldHist;
 }
-$("serviceType").addEventListener("change",()=>{$("customWrap").hidden=$("serviceType").value!=="Custom Service";$("customService").required=$("serviceType").value==="Custom Service";});
-$("feeForm").addEventListener("submit",e=>{e.preventDefault();const amount=Number($("feeAmount").value),service=$("serviceType").value==="Custom Service"?$("customService").value.trim():$("serviceType").value;if(!service){toast("Enter the custom service name.");return;}if(!Number.isFinite(amount)||amount<=0){toast("Enter a fee greater than zero.");return;}
-records.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),service,amount,date:$("feeDate").value||today,recipient:$("recipient").value.trim(),employee:$("employee").value.trim(),receipt:$("receipt").value.trim(),created:Date.now()});save();render();$("feeAmount").value="";$("recipient").value="";$("employee").value="";$("receipt").value="";$("customService").value="";toast("License / fee recorded.");});
-["filterService","filterFrom","filterTo"].forEach(id=>$(id).addEventListener("change",render));
-$("clearFilters").addEventListener("click",()=>{$("filterService").value="";$("filterFrom").value="";$("filterTo").value="";render();});
-document.addEventListener("click",e=>{const id=e.target.dataset.delete;if(id&&confirm("Delete this record? Totals will be recalculated.")){records=records.filter(r=>r.id!==id);save();render();toast("Record deleted.");}});
-function csv(v){return '"'+String(v??"").replace(/"/g,'""')+'"';}
-$("export").addEventListener("click",()=>{const rows=filtered(),data=[["Date","Service","Fee","Recipient / Business","Issued By","Receipt / Notes"],...rows.map(r=>[r.date,r.service,r.amount,r.recipient,r.employee,r.receipt])];const blob=new Blob(["\ufeff"+data.map(r=>r.map(csv).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="fivem-state-service-fees.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast("CSV export downloaded.");});
-function discountValues(){
- const original=Math.max(0,Number($("originalFee").value)||0);
- const pct=Math.min(100,Math.max(0,Number($("discountPercent").value)||0));
- const saved=original*pct/100,finalFee=original-saved;
- $("discountSaved").textContent=money(saved);$("discountFinal").textContent=money(finalFee);
+function cartMath(c){const line=c.price*c.qty,discount=line*c.discount/100;return {line,discount,total:line-discount};}
+function totals(){return cart.reduce((a,c)=>{const x=cartMath(c);a.subtotal+=x.line;a.discount+=x.discount;a.total+=x.total;a.qty+=c.qty;return a;},{subtotal:0,discount:0,total:0,qty:0});}
+function renderCart(){
+ const t=totals();$("cartBadge").textContent=t.qty+" item"+(t.qty===1?"":"s");$("subtotal").textContent=money(t.subtotal);$("discountTotal").textContent="−"+money(t.discount);$("cartTotal").textContent=money(t.total);$("checkoutBtn").disabled=cart.length===0;
+ $("cartLines").innerHTML=cart.length?cart.map(c=>{const x=cartMath(c);return `<div class="cart-line"><div><div class="line-title">${esc(c.name)}</div><div class="line-meta">${money(c.price)} each · ${money(x.total)} line total</div><div class="line-controls"><button class="qtybtn" data-qty="-1" data-id="${c.id}" aria-label="Decrease quantity">−</button><span class="qty">${c.qty}</span><button class="qtybtn" data-qty="1" data-id="${c.id}" aria-label="Increase quantity">＋</button><label class="muted" for="disc-${c.id}">Discount %</label><input class="discount-input" id="disc-${c.id}" type="number" min="0" max="100" step=".1" value="${c.discount}" data-discount="${c.id}" aria-label="Discount percent for ${esc(c.name)}"><button class="remove" data-remove="${c.id}">Remove</button></div></div><div class="line-total">${money(x.total)}<div class="sub">${x.discount?money(x.discount)+" off":""}</div></div></div>`}).join(""):'<div class="empty">Your cart is empty. Add a license or permit to begin.</div>';
 }
-function showFeeTab(tab){
- const discount=tab==="discount";
- $("recordPane").hidden=discount;$("discountPane").hidden=!discount;
- $("tabRecord").classList.toggle("active",!discount);$("tabDiscount").classList.toggle("active",discount);
- $("tabRecord").setAttribute("aria-selected",String(!discount));$("tabDiscount").setAttribute("aria-selected",String(discount));
+function filteredReceipts(){
+ const svc=$("historyFilter").value,from=$("historyFrom").value,to=$("historyTo").value;
+ return receipts.filter(r=>(!svc||r.items.some(i=>i.name===svc))&&(!from||r.date>=from)&&(!to||r.date<=to)).sort((a,b)=>b.created-a.created);
 }
-$("tabRecord").addEventListener("click",()=>showFeeTab("record"));
-$("tabDiscount").addEventListener("click",()=>{showFeeTab("discount");discountValues();});
-["originalFee","discountPercent"].forEach(id=>$(id).addEventListener("input",discountValues));
-$("discountService").addEventListener("change",()=>{$("discountCustomWrap").hidden=$("discountService").value!=="Custom Service";});
-$("useDiscount").addEventListener("click",()=>{
- const original=Math.max(0,Number($("originalFee").value)||0),pct=Number($("discountPercent").value);
- if(original<=0){toast("Enter an original fee greater than zero.");return;}
- if(!Number.isFinite(pct)||pct<0||pct>100){toast("Discount must be between 0% and 100%.");return;}
- const chosen=$("discountService").value;
- if(chosen==="Custom Service"&&!$("discountCustomName").value.trim()){toast("Enter the custom service name.");return;}
- $("serviceType").value=chosen;
- $("customWrap").hidden=chosen!=="Custom Service";
- $("customService").required=chosen==="Custom Service";
- if(chosen==="Custom Service")$("customService").value=$("discountCustomName").value.trim();
- $("feeAmount").value=(original*(1-pct/100)).toFixed(2);
- $("feeDate").value=$("feeDate").value||today;
- showFeeTab("record");
- $("feeAmount").focus();
- toast("Discounted fee filled in. Complete the details and record it.");
+function renderHistory(){
+ const list=filteredReceipts(),allTotal=receipts.reduce((a,r)=>a+r.total,0),allDiscount=receipts.reduce((a,r)=>a+r.discount,0),items=receipts.reduce((a,r)=>a+r.items.reduce((n,i)=>n+i.qty,0),0);
+ $("statRevenue").textContent=money(allTotal);$("statCheckouts").textContent=receipts.length;$("statItems").textContent=items;$("statDiscount").textContent=money(allDiscount);
+ $("historyRows").innerHTML=list.length?list.flatMap(r=>r.items.map((it,index)=>`<tr><td>${esc(r.receipt)}</td><td>${esc(r.date)}</td><td><strong>${esc(it.name)}</strong></td><td>${esc(r.customer||"—")}</td><td>${esc(r.staff||"—")}</td><td>${it.qty}</td><td>${money(it.subtotal)}</td><td class="blue">${money(it.discount)}</td><td class="mint"><strong>${money(it.total)}</strong></td><td>${index===0?`<button class="delete" data-delete-receipt="${r.id}">Delete receipt</button>`:""}</td></tr>`)).join(""):'<tr><td colspan="10" class="empty">No completed checkouts match these filters.</td></tr>';
+}
+function render(){renderCatalog();renderCart();renderHistory();save();}
+document.addEventListener("click",e=>{
+ const add=e.target.dataset.add;if(add){const s=serviceById(add);if(s){const existing=cart.find(c=>c.serviceId===s.id);if(existing)existing.qty++;else cart.push({id:id(),serviceId:s.id,name:s.name,price:s.price,qty:1,discount:0});renderCart();save();toast(s.name+" added to cart.");}return;}
+ const q=e.target.dataset.qty;if(q){const c=cart.find(x=>x.id===e.target.dataset.id);if(c){c.qty+=Number(q);if(c.qty<1)cart=cart.filter(x=>x.id!==c.id);renderCart();save();}return;}
+ const rem=e.target.dataset.remove;if(rem){cart=cart.filter(c=>c.id!==rem);renderCart();save();toast("Item removed.");return;}
+ const del=e.target.dataset.deleteReceipt;if(del&&confirm("Delete this checkout and all its item records?")){receipts=receipts.filter(r=>r.id!==del);renderHistory();save();toast("Checkout removed from history.");}
 });
-discountValues();
+$("cartLines").addEventListener("input",e=>{const cid=e.target.dataset.discount;if(cid){const c=cart.find(x=>x.id===cid);if(c){const v=Number(e.target.value);c.discount=Number.isFinite(v)?Math.min(100,Math.max(0,v)):0;const pos=e.target.selectionStart;renderCart();save();const next=$("disc-"+cid);if(next){next.focus();try{next.setSelectionRange(pos,pos);}catch(_){}}}}});
+$("searchItems").addEventListener("input",renderCatalog);$("categoryFilter").addEventListener("change",renderCatalog);
+$("clearCartBtn").addEventListener("click",()=>{if(!cart.length)return;if(confirm("Clear every item from the cart?")){cart=[];renderCart();save();toast("Cart cleared.");}});
+$("checkoutBtn").addEventListener("click",()=>{
+ if(!cart.length){toast("Add at least one item to the cart.");return;}
+ const t=totals(),receipt="SS-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+String(receipts.length+1).padStart(3,"0");
+ const items=cart.map(c=>{const x=cartMath(c);return {name:c.name,serviceId:c.serviceId,price:c.price,qty:c.qty,discountPercent:c.discount,subtotal:Number(x.line.toFixed(2)),discount:Number(x.discount.toFixed(2)),total:Number(x.total.toFixed(2))};});
+ const rec={id:id(),receipt,date:$("checkoutDate").value||today,customer:$("customer").value.trim(),staff:$("staff").value.trim(),note:$("receiptNote").value.trim(),items,subtotal:Number(t.subtotal.toFixed(2)),discount:Number(t.discount.toFixed(2)),total:Number(t.total.toFixed(2)),created:Date.now()};
+ receipts.push(rec);cart=[];save();render();$("customer").value="";$("staff").value="";$("receiptNote").value="";toast("Checkout complete! "+receipt+" recorded for "+money(rec.total)+".");
+});
+$("saveServiceBtn").addEventListener("click",()=>{
+ const name=$("newName").value.trim(),category=$("newCategory").value.trim()||"Other",price=Number($("newPrice").value);
+ if(!name){toast("Enter a service name.");return;}if(!Number.isFinite(price)||price<0){toast("Enter a valid non-negative fee.");return;}
+ const existing=services.find(s=>s.name.toLowerCase()===name.toLowerCase());if(existing){toast("A service with that name already exists.");return;}
+ services.push({id:id(),name,category,price});$("newName").value="";$("newCategory").value="";$("newPrice").value="";renderCatalog();save();toast("Service added to catalogue.");
+});
+$("loadServiceBtn").addEventListener("click",()=>{const s=serviceById($("editService").value);if(!s){toast("Choose a service first.");return;}$("newName").value=s.name;$("newCategory").value=s.category;$("newPrice").value=s.price;$("saveServiceBtn").textContent="Save changes";$("saveServiceBtn").dataset.edit=s.id;toast("Service loaded. Change its details and click Save changes.");});
+$("saveServiceBtn").addEventListener("click",function editExisting(){
+ const sid=$("saveServiceBtn").dataset.edit;if(!sid)return;
+ const s=serviceById(sid),name=$("newName").value.trim(),category=$("newCategory").value.trim()||"Other",price=Number($("newPrice").value);
+ if(!s||!name||!Number.isFinite(price)||price<0){toast("Enter a name and valid fee.");return;}
+ if(services.some(x=>x.id!==sid&&x.name.toLowerCase()===name.toLowerCase())){toast("Another service already uses that name.");return;}
+ s.name=name;s.category=category;s.price=price;
+ cart.forEach(c=>{if(c.serviceId===sid){c.name=name;c.price=price;}});
+ delete $("saveServiceBtn").dataset.edit;$("saveServiceBtn").textContent="Add service";$("newName").value="";$("newCategory").value="";$("newPrice").value="";render();toast("Service updated.");
+});
+$("deleteServiceBtn").addEventListener("click",()=>{const sid=$("editService").value;if(!sid){toast("Choose a service to delete.");return;}const s=serviceById(sid);if(!confirm("Delete "+s.name+" from the service catalogue? Past receipts stay in history."))return;services=services.filter(x=>x.id!==sid);cart=cart.filter(x=>x.serviceId!==sid);render();toast("Service deleted.");});
+["historyFilter","historyFrom","historyTo"].forEach(id=>$ (id).addEventListener("change",renderHistory));
+$("resetHistory").addEventListener("click",()=>{$("historyFilter").value="";$("historyFrom").value="";$("historyTo").value="";renderHistory();});
+function csv(v){return '"'+String(v??"").replace(/"/g,'""')+'"';}
+$("exportBtn").addEventListener("click",()=>{
+ const data=[["Receipt","Date","Recipient / Business","Issued By","Service","Quantity","Unit Price","Subtotal","Discount %","Discount Amount","Collected","Notes"]];
+ receipts.forEach(r=>r.items.forEach(i=>data.push([r.receipt,r.date,r.customer,r.staff,i.name,i.qty,i.price,i.subtotal,i.discountPercent,i.discount,i.total,r.note])));
+ const blob=new Blob(["\ufeff"+data.map(row=>row.map(csv).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="fivem-state-services-checkouts.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast("Checkout history exported to CSV.");
+});
 render();
 })();
 </script></body></html>
